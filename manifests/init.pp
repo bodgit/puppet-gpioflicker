@@ -1,32 +1,34 @@
+# Manage gpioflicker.
 #
+# @example Declaring the class
+#   class { '::gpioflicker':
+#     device => '/dev/gpio1',
+#     pin    => 0,
+#   }
+#
+# @param active_time
+# @param device
+# @param intial_state
+# @param package_name
+# @param pin
+# @param reversed
+# @param service_name
+#
+# @since 1.0.0
 class gpioflicker (
-  $device,
-  $pin,
-  $active_time   = undef,
-  $initial_state = undef,
-  $package_name  = $::gpioflicker::params::package_name,
-  $reversed      = false,
-  $service_name  = $::gpioflicker::params::service_name,
+  Stdlib::Absolutepath    $device,
+  Integer[0]              $pin,
+  Optional[Integer[0]]    $active_time   = undef,
+  Optional[Integer[0, 1]] $initial_state = undef,
+  String                  $package_name  = $::gpioflicker::params::package_name,
+  Boolean                 $reversed      = false,
+  String                  $service_name  = $::gpioflicker::params::service_name,
 ) inherits ::gpioflicker::params {
 
-  if $active_time {
-    validate_integer($active_time)
-  }
-  validate_absolute_path($device)
-  if $initial_state {
-    validate_integer($initial_state, 1, 0)
-  }
-  validate_string($package_name)
-  validate_integer($pin)
-  validate_bool($reversed)
-  validate_string($service_name)
+  contain ::gpioflicker::install
+  contain ::gpioflicker::config
+  contain ::gpioflicker::service
 
-  include ::gpioflicker::install
-  include ::gpioflicker::service
-
-  anchor { 'gpioflicker::begin': }
-  anchor { 'gpioflicker::end': }
-
-  Anchor['gpioflicker::begin'] -> Class['::gpioflicker::install']
-    ~> Class['::gpioflicker::service'] -> Anchor['gpioflicker::end']
+  Class['::gpioflicker::install'] -> Class['::gpioflicker::config']
+    ~> Class['::gpioflicker::service']
 }
