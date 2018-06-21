@@ -8,7 +8,7 @@
 #
 # @param active_time
 # @param device
-# @param intial_state
+# @param initial_state
 # @param package_name
 # @param pin
 # @param reversed
