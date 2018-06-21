@@ -2,7 +2,7 @@
 
 Tested with Travis CI
 
-[![Build Status](https://travis-ci.org/bodgit/puppet-gpioflicker.svg?branch=master)](https://travis-ci.org/bodgit/puppet-gpioflicker)
+[![Build Status](https://travis-ci.com/bodgit/puppet-gpioflicker.svg?branch=master)](https://travis-ci.com/bodgit/puppet-gpioflicker)
 [![Coverage Status](https://coveralls.io/repos/bodgit/puppet-gpioflicker/badge.svg?branch=master&service=github)](https://coveralls.io/github/bodgit/puppet-gpioflicker?branch=master)
 [![Puppet Forge](http://img.shields.io/puppetforge/v/bodgit/gpioflicker.svg)](https://forge.puppetlabs.com/bodgit/gpioflicker)
 
